@@ -1,6 +1,6 @@
 {
 	"name": "react-ts-modal-cserizay",
-	"version": "1.2.1",
+	"version": "1.2.5",
 	"description": "Helping you creating modal and handling its various states for React app - compatible with typescript",
 	"main": "dist/cjs/index.js",
 	"module": "dist/esm/index.js",
@@ -12,7 +12,8 @@
 		"build": "rm -rf dist/ && npm run build:esm && npm run build:cjs && npm run copy:styles",
 		"build:esm": "tsc",
 		"build:cjs": "tsc --module commonJS --outDir dist/cjs",
-		"copy:styles": "mkdir dist\\cjs\\styles && mkdir dist\\esm\\styles && copy src\\styles\\modalWindow.css dist\\cjs\\styles && copy src\\styles\\modalWindow.css dist\\esm\\styles"
+		"copy:styles": "mkdir dist\\cjs\\styles && mkdir dist\\esm\\styles && copy src\\styles\\modalWindow.css dist\\cjs\\styles && copy src\\styles\\modalWindow.css dist\\esm\\styles",
+		"docs": "typedoc --out docs src"
 	},
 	"keywords": [
 		"modal",
@@ -36,5 +37,9 @@
 	"peerDependencies": {
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0"
+	},
+	"dependencies": {
+		"jsdoc": "^4.0.2",
+		"typedoc": "^0.24.8"
 	}
 }

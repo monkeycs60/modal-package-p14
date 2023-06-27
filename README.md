@@ -7,10 +7,10 @@
 
 ## Table of Contents
 
--   [Installation](#installation)
--   [Prerequisites](#prerequisites)
--   [Usage](#usage)
--   [License](#license)
+-  [Installation](#installation)
+-  [Prerequisites](#prerequisites)
+-  [Usage](#usage)
+-  [License](#license)
 
 ## Installation
 
@@ -20,60 +20,65 @@ npm install react-ts-modal-cserizay
 
 ## Prerequisites
 
--   [React 18.2.0](https://reactjs.org/)
--   [react-dom 18.2.0](https://www.npmjs.com/package/react-dom)
--   [Node.js v18](https://nodejs.org/en/)
--   [TypeScript 5+](https://www.typescriptlang.org/)
--   [npm 8+](https://www.npmjs.com/)
+-  [React 18.2.0](https://reactjs.org/)
+-  [react-dom 18.2.0](https://www.npmjs.com/package/react-dom)
+-  [Node.js v18](https://nodejs.org/en/)
+-  [TypeScript 5+](https://www.typescriptlang.org/)
+-  [npm 8+](https://www.npmjs.com/)
 
 ## Usages
 
 ```tsx
-import { createModal } from 'react-ts-modal-cserizay';
-
-const { Modal, openModal, closeModal } = createModal();
+import { useState } from 'react';
+import { ModalWindow } from 'react-ts-modal-cserizay';
 
 const RandomReactComponent = () => {
-    const handleSave = () => {
-        // Do whatever you want here.
-        // Then, open the modal.
-        openModal();
-    };
+	// Create a state to manage the modal's state
+	const [isOpen, setIsOpen] = useState(false);
 
-    return (
-        <div>
-            <button onClick={handleSave}>Save</button>
+	// Create a function to open the modal
+	const handleOpen = () => {
+		setIsOpen(true);
+	};
 
-            <Modal>You successfully saved your data!</Modal>
-        </div>
-    );
+	// Create a function to close the modal
+	const handleClose = () => {
+		setIsOpen(false);
+	};
+
+	return (
+		<div>
+			<button onClick={handleOpen}>Open Modal</button>
+
+			<ModalWindow isOpen={isOpen} onClose={handleClose}>
+				<p>You successfully opened the modal!</p>
+			</ModalWindow>
+		</div>
+	);
 };
 ```
 
-
 && another example
 
-
 ```tsx
-import { createModal } from 'react-ts-modal-cserizay';
-
-const { Modal, openModal, closeModal } = createModal();
+import { useState } from 'react';
+import { ModalWindow } from 'react-ts-modal-cserizay';
 
 const AnotherRandomReactComponent = () => {
-    const handleQuit = () => {
-        // Do whatever you want here.
-        // Then, open the modal.
-        closeModal();
-    };
+	const [isOpen, setIsOpen] = useState(false);
 
-    return (
-        <div>
-            <Modal>
-                <p> Are you sure you want to quit? </p>
-                <button onClick={handleQuit}>Quit</button>
-            </Modal>
-        </div>
-    );
+	const handleClose = () => {
+		setIsOpen(false);
+	};
+
+	return (
+		<div>
+			<ModalWindow isOpen={isOpen} onClose={handleClose}>
+				<p>Are you sure you want to quit?</p>
+				<button onClick={handleClose}>Yes, close the modal.</button>
+			</ModalWindow>
+		</div>
+	);
 };
 ```
 

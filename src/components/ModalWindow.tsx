@@ -29,20 +29,20 @@ export const ModalWindow = ({ isOpen, onClose, children }: ModalProps) => {
 	 */
 	useEffect(() => {
 		/**
-		 * Function to handle the 'keydown' event.
+		 * Function to handle the 'keypress' event.
 		 * If the 'Escape' key is pressed and the modal is open, the onClose function is called.
 		 *
 		 * @param {KeyboardEvent} event - The keyboard event.
 		 */
-		const handleKeyDown = (event: KeyboardEvent) => {
+		const handleKeyPress = (event: KeyboardEvent) => {
 			if (event.key === 'Escape' && isOpen) {
 				onClose();
 			}
 		};
 
-		document.addEventListener('keydown', handleKeyDown);
+		document.addEventListener('keypress', handleKeyPress);
 		return () => {
-			document.removeEventListener('keydown', handleKeyDown);
+			document.removeEventListener('keypress', handleKeyPress);
 		};
 	}, [isOpen, onClose]);
 

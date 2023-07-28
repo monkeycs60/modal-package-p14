@@ -1,4 +1,4 @@
-import React, { useEffect, MouseEvent } from 'react';
+import React, { MouseEvent } from 'react';
 import '../styles/modalWindow.css';
 
 export interface ModalProps {

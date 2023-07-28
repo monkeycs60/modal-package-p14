@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, MouseEvent } from 'react';
 import '../styles/modalWindow.css';
 
 export interface ModalProps {
@@ -9,7 +9,8 @@ export interface ModalProps {
 
 /**
  * ModalWindow TypeScript React component that renders a modal window with a close button and children
- * content
+ * content. This modal can be closed by clicking the close button, clicking outside the modal window,
+ * or pressing the escape key.
  *
  * @param {boolean} props.isOpen - A boolean indicating if the modal window should be open or not.
  * @param {Function} props.onClose - A function that is called when the modal needs to be closed.
@@ -23,15 +24,46 @@ export interface ModalProps {
  * @returns {React.Component} The ModalWindow component.
  */
 export const ModalWindow = ({ isOpen, onClose, children }: ModalProps) => {
+	/**
+	 * useEffect hook to handle the addition and cleanup of event listeners for closing the modal.
+	 */
+	useEffect(() => {
+		/**
+		 * Function to handle the 'keydown' event.
+		 * If the 'Escape' key is pressed and the modal is open, the onClose function is called.
+		 *
+		 * @param {KeyboardEvent} event - The keyboard event.
+		 */
+		const handleKeyDown = (event: KeyboardEvent) => {
+			if (event.key === 'Escape' && isOpen) {
+				onClose();
+			}
+		};
+
+		document.addEventListener('keydown', handleKeyDown);
+		return () => {
+			document.removeEventListener('keydown', handleKeyDown);
+		};
+	}, [isOpen, onClose]);
+
+	/**
+	 * Function to handle the 'click' event within the modal.
+	 * It stops the propagation of the event to prevent the modal from closing.
+	 *
+	 * @param {MouseEvent} e - The mouse event.
+	 */
+	const handleClickInside = (e: MouseEvent) => {
+		e.stopPropagation();
+	};
+
 	return (
 		isOpen && (
 			<div className='modal-overlay' onClick={onClose}>
 				<div
+					role='dialog'
+					aria-modal='true'
 					className={`modal-container`}
-					onClick={(e) => {
-						// Prevents the modal from closing when clicking inside the modal (see onClose on the div below)
-						e.stopPropagation();
-					}}>
+					onClick={handleClickInside}>
 					<button
 						className='modal-close'
 						aria-label='Close Modal'

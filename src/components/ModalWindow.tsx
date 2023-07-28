@@ -35,7 +35,7 @@ export const ModalWindow = ({ isOpen, onClose, children }: ModalProps) => {
 		 * @param {KeyboardEvent} event - The keyboard event.
 		 */
 		const handleKeyEscape = (event: KeyboardEvent) => {
-			if (event.code === 'Escape' && isOpen) {
+			if (event.code === 'Escape') {
 				onClose();
 			}
 		};

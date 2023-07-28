@@ -1,6 +1,6 @@
 {
 	"name": "react-ts-modal-cserizay",
-	"version": "1.2.8",
+	"version": "1.2.9",
 	"description": "Helping you creating modal and handling its various states for React app - compatible with typescript",
 	"main": "dist/cjs/index.js",
 	"module": "dist/esm/index.js",

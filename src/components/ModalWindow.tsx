@@ -34,15 +34,15 @@ export const ModalWindow = ({ isOpen, onClose, children }: ModalProps) => {
 		 *
 		 * @param {KeyboardEvent} event - The keyboard event.
 		 */
-		const handleKeyPress = (event: KeyboardEvent) => {
-			if (event.key === 'Escape' && isOpen) {
+		const handleKeyEscape = (event: KeyboardEvent) => {
+			if (event.code === 'Escape' && isOpen) {
 				onClose();
 			}
 		};
 
-		document.addEventListener('keypress', handleKeyPress);
+		document.addEventListener('keypress', handleKeyEscape);
 		return () => {
-			document.removeEventListener('keypress', handleKeyPress);
+			document.removeEventListener('keypress', handleKeyEscape);
 		};
 	}, [isOpen, onClose]);
 

@@ -9,8 +9,7 @@ export interface ModalProps {
 
 /**
  * ModalWindow TypeScript React component that renders a modal window with a close button and children
- * content. This modal can be closed by clicking the close button, clicking outside the modal window,
- * or pressing the escape key.
+ * content. This modal can be closed by clicking the close button or clicking outside the modal window
  *
  * @param {boolean} props.isOpen - A boolean indicating if the modal window should be open or not.
  * @param {Function} props.onClose - A function that is called when the modal needs to be closed.
@@ -24,28 +23,7 @@ export interface ModalProps {
  * @returns {React.Component} The ModalWindow component.
  */
 export const ModalWindow = ({ isOpen, onClose, children }: ModalProps) => {
-	/**
-	 * useEffect hook to handle the addition and cleanup of event listeners for closing the modal.
-	 */
-	useEffect(() => {
-		/**
-		 * Function to handle the 'keypress' event.
-		 * If the 'Escape' key is pressed and the modal is open, the onClose function is called.
-		 *
-		 * @param {KeyboardEvent} event - The keyboard event.
-		 */
-		const handleKeyEscape = (event: KeyboardEvent) => {
-			if (event.code === 'Escape') {
-				onClose();
-			}
-		};
-
-		document.addEventListener('keypress', handleKeyEscape);
-		return () => {
-			document.removeEventListener('keypress', handleKeyEscape);
-		};
-	}, [isOpen, onClose]);
-
+	 
 	/**
 	 * Function to handle the 'click' event within the modal.
 	 * It stops the propagation of the event to prevent the modal from closing.
